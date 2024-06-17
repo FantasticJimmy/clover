@@ -1,0 +1,9 @@
+{
+  "name": "clover_health",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/clover_health/src",
+  "projectType": "application",
+  "tags": [],
+  "// targets": "to see all targets run: nx show project clover_health --web",
+  "targets": {}
+}
