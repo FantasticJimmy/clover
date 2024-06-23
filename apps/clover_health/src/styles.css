@@ -1,1 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
+/* ./apps/your-app/src/styles.css */
+
+/* Your styles goes here. */
+/* @import 'rewind-ui/dist/rewind-ui.css'; */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Add Rewind-UI CSS */

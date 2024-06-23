@@ -1,0 +1,33 @@
+name: clover_health
+
+networks:
+  gateway: {}
+
+services:
+  backend:
+    image: backend
+    build:
+      context: .
+      dockerfile: ./docker/backend.dockerfile
+    command: bash -c "node main.js"
+    environment:
+      - CONVERT_IP=convert
+    ports:
+      - '3000:3000'
+      - '5454:5454'
+    networks:
+      - gateway
+
+  convert:
+    image: convert
+    build:
+      context: ./apps/convert/
+      dockerfile: ../../docker/convert.dockerfile
+    command: >
+      bash -c "python main.py"
+    environment:
+      - BACKEND_IP=backend
+    networks:
+      - gateway
+    ports:
+      - '50051:50051'

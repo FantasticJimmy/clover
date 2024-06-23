@@ -1,0 +1,3 @@
+{"name": "bad       ", "valid": false, "count": 12}
+{"name": "Broken    ", "valid": false, "count": -14}
+{"name": "Leg Gone  ", "valid": true, "count": 99}

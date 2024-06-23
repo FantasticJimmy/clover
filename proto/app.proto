@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package app;
+
+service AppService {
+  rpc GetResponse (Request) returns (Response);
+  rpc GetResult (Request) returns (ResultList);
+}
+
+message Request {
+  string message = 1;
+}
+
+message Response {
+  string reply = 1;
+}
+
+message Result {
+  string event_name = 1;
+  bool valid = 2;
+  int32 count = 3;
+}
+
+message ResultList {
+  repeated Result results = 1;
+}
