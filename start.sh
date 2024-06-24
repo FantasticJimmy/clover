@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+npm i
+nx build backend
 docker compose build
 docker compose up -d
 

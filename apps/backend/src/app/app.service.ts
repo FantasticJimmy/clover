@@ -1,29 +1,53 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, OnModuleInit } from '@nestjs/common';
 import { Client, ClientGrpc, Transport } from '@nestjs/microservices';
 import { Request, Response } from '../../../../proto/app';
 import * as fs from 'fs';
 import * as path from 'path';
 import { AppService as ProtoAppService, Result } from '../../../../proto/app';
 
-const assetsPath = path.join(__dirname, 'assets');
-const protoPath = path.join(assetsPath, 'proto', 'app.proto');
+const grpc = require('@grpc/grpc-js');
+const protoLoader = require('@grpc/proto-loader');
+
+// Load the protobuf
+const protoPath = path.join(__dirname, '..', '..', '..', 'proto', 'app.proto');
+const packageDefinition = protoLoader.loadSync(protoPath);
+const protoDescriptor = grpc.loadPackageDefinition(packageDefinition).app;
 
 @Injectable()
-export class AppService {
-  @Client({
-    transport: Transport.GRPC,
-    options: {
-      package: 'app',
-      protoPath: protoPath,
-      url: process.env.CONVERT_IP + ':50051', // gRPC python server address
-    },
-  })
+export class AppService implements OnModuleInit {
+  // @Client({
+  //   transport: Transport.GRPC,
+  //   options: {
+  //     package: 'app',
+  //     protoPath: protoPath,
+  //     url: 'localhost:50051', // gRPC python server address
+  //   },
+  // })
   private client: ClientGrpc;
   private appServiceClient: ProtoAppService;
 
   onModuleInit() {
-    this.appServiceClient =
-      this.client.getService<ProtoAppService>('AppService');
+    // @ts-ignore
+    this.appServiceClient = new protoDescriptor.AppService(
+      'localhost:50051',
+      grpc.credentials.createInsecure()
+    );
+    // this.client.getService<ProtoAppService>('AppService');
+  }
+
+  processData() {
+    return new Promise((resolve, reject) => {
+      const request: Request = { message: 'I want ma stuff' };
+      // @ts-ignore
+      this.appServiceClient.GetResult(request, (error, response) => {
+        if (!error) {
+          resolve(true);
+        } else {
+          console.error('Error:', error);
+          reject(false);
+        }
+      });
+    });
   }
 
   saveData(data: Result[]) {
@@ -47,6 +71,7 @@ export class AppService {
       return true;
     } catch (e) {
       console.log(`error occured`);
+      console.log(e);
       return false;
     }
   }
@@ -56,10 +81,6 @@ export class AppService {
     console.log(`saying hello to ${request.message}`);
     const reply: Response = { reply: `Hello ${request.message} from Node` };
     return reply;
-  }
-
-  async processData() {
-    return this.appServiceClient.GetResult({ message: 'I want ma result' });
   }
 }
 

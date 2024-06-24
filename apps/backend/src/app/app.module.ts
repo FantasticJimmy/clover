@@ -13,7 +13,7 @@ export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
       .apply((req, res, next) => {
-        if (req.method === 'GET' && req.path === '/') {
+        if (req.method === 'GET' && req.originalUrl === '/') {
           res.sendFile(join(__dirname, 'assets', 'index.html'));
         } else {
           next();

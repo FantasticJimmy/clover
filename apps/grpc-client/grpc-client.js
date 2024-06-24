@@ -4,23 +4,17 @@ const path = require('path');
 
 // Load the protobuf
 const PROTO_PATH = path.join(__dirname, '../../proto/app.proto');
-const packageDefinition = protoLoader.loadSync(PROTO_PATH, {
-  keepCase: true,
-  longs: String,
-  enums: String,
-  defaults: true,
-  oneofs: true,
-});
+const packageDefinition = protoLoader.loadSync(PROTO_PATH);
 const protoDescriptor = grpc.loadPackageDefinition(packageDefinition).app;
 
 // Create a gRPC client
 const client = new protoDescriptor.AppService(
-  'localhost:5000',
+  'localhost:50051',
   grpc.credentials.createInsecure()
 );
 
 // Call the service
-client.GetResponse({ message: 'World' }, (error, response) => {
+client.GetResult({ message: 'World' }, (error, response) => {
   if (!error) {
     console.log('Greeting:', response.reply);
   } else {

@@ -4,11 +4,10 @@
  */
 
 import path from 'path';
-import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app/app.module';
 import { Transport, MicroserviceOptions } from '@nestjs/microservices';
-import * as express from 'express';
+import express from 'express';
 
 const assetsPath = path.join(__dirname, 'assets');
 const protoPath = path.join(assetsPath, 'proto', 'app.proto');

@@ -18,7 +18,42 @@ const API = {
       },
       body: JSON.stringify(payload)
     }).then((response) => response.text())
+  },
+  processData: () => {
+    return fetch('http://localhost:3000/data/process').then((response) => response.text())
   }
+}
+
+// @ts-ignore
+const toastFunc = (good, text, taost) => {
+  if (good) {
+    return taost.add({
+      id: 'bla1',
+      color: 'green',
+      closeOnClick: true,
+      duration: 2000,
+      iconType: 'success',
+      pauseOnHover: true,
+      radius: 'lg',
+      shadow: 'none',
+      shadowColor: 'none',
+      showProgress: true,
+      title: text,
+    });
+  }
+  return taost.add({
+    id: 'bla2',
+    color: 'red',
+    closeOnClick: true,
+    duration: 2000,
+    iconType: 'error',
+    pauseOnHover: true,
+    radius: 'lg',
+    shadow: 'none',
+    shadowColor: 'none',
+    showProgress: true,
+    title: text,
+  });
 }
 
 export function App() {
@@ -30,35 +65,19 @@ export function App() {
   const submit = useCallback(async () => {
     const response = await API.postToCreate(data)
     if (response === 'true') {
-      toast.add({
-        id: 'bla1',
-        color: 'green',
-        closeOnClick: true,
-        duration: 2000,
-        iconType: 'success',
-        pauseOnHover: true,
-        radius: 'lg',
-        shadow: 'none',
-        shadowColor: 'none',
-        showProgress: true,
-        title: 'Success!',
-      });
+      toastFunc(true, 'Success! Check in file system /apps/convert/data folder', toast)
     } else {
-      toast.add({
-        id: 'bla2',
-        color: 'red',
-        closeOnClick: true,
-        duration: 2000,
-        iconType: 'error',
-        pauseOnHover: true,
-        radius: 'lg',
-        shadow: 'none',
-        shadowColor: 'none',
-        showProgress: true,
-        title: 'Failed!',
-      });
+      toastFunc(false, 'Failed!', toast)
     }
   }, [data])
+  const process = async () => {
+    const res = await API.processData()
+    if (res === 'true') {
+      toastFunc(true, 'File processed! Check in file system /apps/convert/output folder', toast)
+    } else {
+      toastFunc(false, 'Processing failed!', toast)
+    }
+  }
 
   const changeHandler = useCallback((indexPos: number, key: string, newValue: unknown) => {
     setData((prevData) => {
@@ -75,7 +94,10 @@ export function App() {
       <Card className="min-w-500">
         <Card.Header className="relative">
           <Ribbon radius="md" shadow="none">Clover Health</Ribbon>
-          <Button onClick={submit} >Submit</Button>
+          <div className="gap-4 flex">
+            <Button onClick={submit} >Submit</Button>
+            <Button onClick={process} >Process</Button>
+          </div>
         </Card.Header>
         <Card.Body >
           {data.map((item, index) => <Row key={index} indexPos={index} item={item} changeHandler={changeHandler} />)}

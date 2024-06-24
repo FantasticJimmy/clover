@@ -1,9 +1,0 @@
-{
-  "/save_file": {
-    "target": "http://localhost:3000",
-    "secure": false,
-    "pathRewrite": {
-      "^/save_file": "/data/save_file"
-    }
-  }
-}

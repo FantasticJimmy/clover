@@ -8,9 +8,6 @@
     "serve": {
       "executor": "@nx/js:node",
       "defaultConfiguration": "development",
-      "options": {
-        "buildTarget": "backend:build"
-      },
       "configurations": {
         "development": {
           "buildTarget": "backend:build:development"

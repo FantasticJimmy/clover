@@ -5,9 +5,9 @@
 // source: app.proto
 
 /* eslint-disable */
-import * as _m0 from "protobufjs/minimal";
+import * as _m0 from 'protobufjs/minimal';
 
-export const protobufPackage = "app";
+export const protobufPackage = 'app';
 
 export interface Request {
   message: string;
@@ -28,19 +28,23 @@ export interface ResultList {
 }
 
 function createBaseRequest(): Request {
-  return { message: "" };
+  return { message: '' };
 }
 
 export const Request = {
-  encode(message: Request, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.message !== "") {
+  encode(
+    message: Request,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    if (message.message !== '') {
       writer.uint32(10).string(message.message);
     }
     return writer;
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): Request {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseRequest();
     while (reader.pos < end) {
@@ -63,12 +67,14 @@ export const Request = {
   },
 
   fromJSON(object: any): Request {
-    return { message: isSet(object.message) ? globalThis.String(object.message) : "" };
+    return {
+      message: isSet(object.message) ? globalThis.String(object.message) : '',
+    };
   },
 
   toJSON(message: Request): unknown {
     const obj: any = {};
-    if (message.message !== "") {
+    if (message.message !== '') {
       obj.message = message.message;
     }
     return obj;
@@ -79,25 +85,29 @@ export const Request = {
   },
   fromPartial<I extends Exact<DeepPartial<Request>, I>>(object: I): Request {
     const message = createBaseRequest();
-    message.message = object.message ?? "";
+    message.message = object.message ?? '';
     return message;
   },
 };
 
 function createBaseResponse(): Response {
-  return { reply: "" };
+  return { reply: '' };
 }
 
 export const Response = {
-  encode(message: Response, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.reply !== "") {
+  encode(
+    message: Response,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    if (message.reply !== '') {
       writer.uint32(10).string(message.reply);
     }
     return writer;
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): Response {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseResponse();
     while (reader.pos < end) {
@@ -120,12 +130,14 @@ export const Response = {
   },
 
   fromJSON(object: any): Response {
-    return { reply: isSet(object.reply) ? globalThis.String(object.reply) : "" };
+    return {
+      reply: isSet(object.reply) ? globalThis.String(object.reply) : '',
+    };
   },
 
   toJSON(message: Response): unknown {
     const obj: any = {};
-    if (message.reply !== "") {
+    if (message.reply !== '') {
       obj.reply = message.reply;
     }
     return obj;
@@ -136,18 +148,21 @@ export const Response = {
   },
   fromPartial<I extends Exact<DeepPartial<Response>, I>>(object: I): Response {
     const message = createBaseResponse();
-    message.reply = object.reply ?? "";
+    message.reply = object.reply ?? '';
     return message;
   },
 };
 
 function createBaseResult(): Result {
-  return { eventName: "", valid: false, count: 0 };
+  return { eventName: '', valid: false, count: 0 };
 }
 
 export const Result = {
-  encode(message: Result, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.eventName !== "") {
+  encode(
+    message: Result,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    if (message.eventName !== '') {
       writer.uint32(10).string(message.eventName);
     }
     if (message.valid !== false) {
@@ -160,7 +175,8 @@ export const Result = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): Result {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseResult();
     while (reader.pos < end) {
@@ -198,7 +214,9 @@ export const Result = {
 
   fromJSON(object: any): Result {
     return {
-      eventName: isSet(object.eventName) ? globalThis.String(object.eventName) : "",
+      eventName: isSet(object.eventName)
+        ? globalThis.String(object.eventName)
+        : '',
       valid: isSet(object.valid) ? globalThis.Boolean(object.valid) : false,
       count: isSet(object.count) ? globalThis.Number(object.count) : 0,
     };
@@ -206,7 +224,7 @@ export const Result = {
 
   toJSON(message: Result): unknown {
     const obj: any = {};
-    if (message.eventName !== "") {
+    if (message.eventName !== '') {
       obj.eventName = message.eventName;
     }
     if (message.valid !== false) {
@@ -223,7 +241,7 @@ export const Result = {
   },
   fromPartial<I extends Exact<DeepPartial<Result>, I>>(object: I): Result {
     const message = createBaseResult();
-    message.eventName = object.eventName ?? "";
+    message.eventName = object.eventName ?? '';
     message.valid = object.valid ?? false;
     message.count = object.count ?? 0;
     return message;
@@ -235,7 +253,10 @@ function createBaseResultList(): ResultList {
 }
 
 export const ResultList = {
-  encode(message: ResultList, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: ResultList,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
     for (const v of message.results) {
       Result.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -243,7 +264,8 @@ export const ResultList = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): ResultList {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseResultList();
     while (reader.pos < end) {
@@ -267,7 +289,9 @@ export const ResultList = {
 
   fromJSON(object: any): ResultList {
     return {
-      results: globalThis.Array.isArray(object?.results) ? object.results.map((e: any) => Result.fromJSON(e)) : [],
+      results: globalThis.Array.isArray(object?.results)
+        ? object.results.map((e: any) => Result.fromJSON(e))
+        : [],
     };
   },
 
@@ -282,7 +306,9 @@ export const ResultList = {
   create<I extends Exact<DeepPartial<ResultList>, I>>(base?: I): ResultList {
     return ResultList.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<ResultList>, I>>(object: I): ResultList {
+  fromPartial<I extends Exact<DeepPartial<ResultList>, I>>(
+    object: I
+  ): ResultList {
     const message = createBaseResultList();
     message.results = object.results?.map((e) => Result.fromPartial(e)) || [];
     return message;
@@ -294,7 +320,7 @@ export interface AppService {
   GetResult(request: Request): Promise<ResultList>;
 }
 
-export const AppServiceServiceName = "app.AppService";
+export const AppServiceServiceName = 'app.AppService';
 export class AppServiceClientImpl implements AppService {
   private readonly rpc: Rpc;
   private readonly service: string;
@@ -306,32 +332,50 @@ export class AppServiceClientImpl implements AppService {
   }
   GetResponse(request: Request): Promise<Response> {
     const data = Request.encode(request).finish();
-    const promise = this.rpc.request(this.service, "GetResponse", data);
+    const promise = this.rpc.request(this.service, 'GetResponse', data);
     return promise.then((data) => Response.decode(_m0.Reader.create(data)));
   }
 
   GetResult(request: Request): Promise<ResultList> {
     const data = Request.encode(request).finish();
-    const promise = this.rpc.request(this.service, "GetResult", data);
+    const promise = this.rpc.request(this.service, 'GetResult', data);
     return promise.then((data) => ResultList.decode(_m0.Reader.create(data)));
   }
 }
 
 interface Rpc {
-  request(service: string, method: string, data: Uint8Array): Promise<Uint8Array>;
+  request(
+    service: string,
+    method: string,
+    data: Uint8Array
+  ): Promise<Uint8Array>;
 }
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
+type Builtin =
+  | Date
+  | Function
+  | Uint8Array
+  | string
+  | number
+  | boolean
+  | undefined;
 
-export type DeepPartial<T> = T extends Builtin ? T
-  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
-  : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
+export type DeepPartial<T> = T extends Builtin
+  ? T
+  : T extends globalThis.Array<infer U>
+  ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U>
+  ? ReadonlyArray<DeepPartial<U>>
+  : T extends {}
+  ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
+export type Exact<P, I extends P> = P extends Builtin
+  ? P
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & {
+      [K in Exclude<keyof I, KeysOfUnion<P>>]: never;
+    };
 
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;
