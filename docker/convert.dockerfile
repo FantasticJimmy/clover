@@ -1,11 +1,11 @@
-FROM python:3.11.4-slim as base
+# FROM python:3.11.4-slim as base
 
-ENV PYTHONDONTWRITEBYTECODE=1
-ENV PYTHONUNBUFFERED=1
+# ENV PYTHONDONTWRITEBYTECODE=1
+# ENV PYTHONUNBUFFERED=1
 
-WORKDIR /app
+# WORKDIR /app
 
-COPY ./ ./
-RUN pip install -r requirements.txt
+# COPY ./ ./
+# RUN pip install -r requirements.txt
 
-CMD ["bash"]
+# CMD ["bash"]

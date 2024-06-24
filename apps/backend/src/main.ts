@@ -8,6 +8,7 @@ import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app/app.module';
 import { Transport, MicroserviceOptions } from '@nestjs/microservices';
+import * as express from 'express';
 
 const assetsPath = path.join(__dirname, 'assets');
 const protoPath = path.join(assetsPath, 'proto', 'app.proto');
@@ -15,11 +16,13 @@ const protoPath = path.join(assetsPath, 'proto', 'app.proto');
 async function bootstrapHttp() {
   const app = await NestFactory.create(AppModule);
   app.enableCors({
-    origin: 'http://localhost:4200', // Allow requests from this origin
+    origin: 'http://localhost:4200', // Allow requests from: Response this origin
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true, // Allow cookies to be sent
     allowedHeaders: 'Content-Type, Accept', // Specify allowed headers
   });
+  // Serve static files from the assets directory
+  app.use('/assets', express.static(path.join(__dirname, 'assets')));
 
   await app.listen(3000);
 }

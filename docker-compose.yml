@@ -18,16 +18,16 @@ services:
     networks:
       - gateway
 
-  convert:
-    image: convert
-    build:
-      context: ./apps/convert/
-      dockerfile: ../../docker/convert.dockerfile
-    command: >
-      bash -c "python main.py"
-    environment:
-      - BACKEND_IP=backend
-    networks:
-      - gateway
-    ports:
-      - '50051:50051'
+  # convert:
+  #   image: convert
+  #   build:
+  #     context: ./apps/convert/
+  #     dockerfile: ../../docker/convert.dockerfile
+  #   command: >
+  #     bash -c "python main.py"
+  #   environment:
+  #     - BACKEND_IP=backend
+  #   networks:
+  #     - gateway
+  #   ports:
+  #     - '50051:50051'
