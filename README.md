@@ -4,12 +4,12 @@ visit http://localhost:3000 for frontend
 
 Enter data and press submit. It'll create a new data file under data folder.
 
-Pressing on `process` to produce the ndjson in output folder based on spec as specified in guidelines.
+Pressing on `process` button to produce the ndjson in output folder based on spec as specified in guidelines.
 
 ```
 The stack:
 
-Nestjs => backend application that
+Nestjs => Backend application
 Convert => Python application that does the conversion and produce ndjson
 Clover_field => React application with Rewind-Ui
 
