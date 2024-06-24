@@ -3,13 +3,13 @@ import { Client, ClientGrpc, Transport } from '@nestjs/microservices';
 import { Request, Response } from '../../../../proto/app';
 import * as fs from 'fs';
 import * as path from 'path';
-import { AppService as ProtoAppService, Result } from '../../../../proto/app';
+import { AppService as ProtoAppService, Result } from 'proto/app';
 
 const grpc = require('@grpc/grpc-js');
 const protoLoader = require('@grpc/proto-loader');
 
 // Load the protobuf
-const protoPath = path.join(__dirname, '..', '..', '..', 'proto', 'app.proto');
+const protoPath = path.join(__dirname, 'assets', 'proto', 'app.proto');
 const packageDefinition = protoLoader.loadSync(protoPath);
 const protoDescriptor = grpc.loadPackageDefinition(packageDefinition).app;
 
